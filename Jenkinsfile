@@ -23,6 +23,9 @@ pipeline {
         }
         stage('Testing libraries'){
             steps{
+                options{
+                    timeout(time: 1, unit:'HOURS')
+                }
                 parallel(
                     a: {helloWorldExternal(name: "Dani", dayOfWeek: "Monday")},
                     b: {helloWorldExternal(name: "Dani", dayOfWeek: "Tuesday")}
