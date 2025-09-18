@@ -41,11 +41,18 @@ pipeline {
                 )
             }
             failure {
+                script {
+                    def commitEmail = bat(
+                    script: 'git log -1 --pretty=format:"%ae"',
+                    returnStdout: true
+                    ).trim()
+
                 emailext(
-                    to: 'danregcal@gmail.com',
+                    to: 'commitEmail',
                     subject: "❌ ${env.JOB_NAME} ${env.BRANCH_NAME} Build Failed",
                     body: "The build has failed."
-                )
+                    )
+                }
             }
         }
 
