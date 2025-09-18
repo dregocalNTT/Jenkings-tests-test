@@ -23,10 +23,10 @@ pipeline {
         }
         stage('Testing libraries'){
             steps{
-                parallel{
+                parallel(
                     a: {helloWorldExternal(name: "Dani", dayOfWeek: "Monday")},
                     b: {helloWorldExternal(name: "Dani", dayOfWeek: "Tuesday")}
-                }
+                )
             }
         }
         stage('Main?'){
