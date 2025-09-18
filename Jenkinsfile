@@ -41,7 +41,7 @@ pipeline {
                     ).trim()
 
                 emailext(
-                    to: 'commitEmail',
+                    to: commitEmail,
                     subject: "✅ ${env.JOB_NAME} ${env.BRANCH_NAME} Build Successful}",
                     body: "The build was successful!}"
                     )
@@ -55,7 +55,7 @@ pipeline {
                     ).trim()
 
                 emailext(
-                    to: 'commitEmail',
+                    to: commitEmail,
                     subject: "❌ ${env.JOB_NAME} ${env.BRANCH_NAME} Build Failed",
                     body: "The build has failed."
                     )
