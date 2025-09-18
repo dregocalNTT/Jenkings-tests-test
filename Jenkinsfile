@@ -35,13 +35,13 @@ pipeline {
     post {
             success {
                 script {
-                    def commitEmail = bat(
+                    def COMMITTER_EMAIL = bat(
                     script: "git --no-pager show -s --format='%%ae'",
                     returnStdout: true).split('\r\n')[2].trim() 
                     echo "COMMITTER_EMAIL: ${COMMITTER_EMAIL}" 
 
                 emailext(
-                    to: commitEmail,
+                    to: COMMITTER_EMAIL,
                     subject: "✅ ${env.JOB_NAME} ${env.BRANCH_NAME} Build Successful}",
                     body: "The build was successful!}"
                     )
@@ -49,13 +49,13 @@ pipeline {
             }
             failure {
                 script {
-                    def commitEmail = bat(
+                    def COMMITTER_EMAIL = bat(
                     script: "git --no-pager show -s --format='%%ae'",
                     returnStdout: true).split('\r\n')[2].trim() 
                     echo "COMMITTER_EMAIL: ${COMMITTER_EMAIL}" 
 
                 emailext(
-                    to: commitEmail,
+                    to: COMMITTER_EMAIL,
                     subject: "❌ ${env.JOB_NAME} ${env.BRANCH_NAME} Build Failed",
                     body: "The build has failed."
                     )
