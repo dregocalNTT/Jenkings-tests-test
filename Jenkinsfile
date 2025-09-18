@@ -36,9 +36,9 @@ pipeline {
             success {
                 script {
                     def commitEmail = bat(
-                    script: 'git log -1 --pretty=format:"%ae"',
-                    returnStdout: true
-                    ).trim()
+                script: 'git log -1 --pretty=format:"%ae"',
+                returnStdout: true
+                ).readLines().last().trim()
 
                 emailext(
                     to: commitEmail,
@@ -50,9 +50,9 @@ pipeline {
             failure {
                 script {
                     def commitEmail = bat(
-                    script: 'git log -1 --pretty=format:"%ae"',
-                    returnStdout: true
-                    ).trim()
+                script: 'git log -1 --pretty=format:"%ae"',
+                returnStdout: true
+                ).readLines().last().trim()
 
                 emailext(
                     to: commitEmail,
