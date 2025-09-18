@@ -34,11 +34,18 @@ pipeline {
     }
     post {
             success {
+                script {
+                    def commitEmail = bat(
+                    script: 'git log -1 --pretty=format:"%ae"',
+                    returnStdout: true
+                    ).trim()
+
                 emailext(
-                    to: 'danregcal@gmail.com',
+                    to: 'commitEmail',
                     subject: "✅ ${env.JOB_NAME} ${env.BRANCH_NAME} Build Successful}",
                     body: "The build was successful!}"
-                )
+                    )
+                }
             }
             failure {
                 script {
