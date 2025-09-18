@@ -37,8 +37,9 @@ pipeline {
                 script {
                     def COMMITTER_EMAIL = bat(
                     script: "git --no-pager show -s --format='%%ae'",
-                    returnStdout: true).split('\r\n')[2].trim() 
+                    returnStdout: true).split('\r\n')[2].replaceAll("'", "").trim()
                     echo "COMMITTER_EMAIL: ${COMMITTER_EMAIL}" 
+
 
                 emailext(
                     to: COMMITTER_EMAIL,
@@ -51,7 +52,7 @@ pipeline {
                 script {
                     def COMMITTER_EMAIL = bat(
                     script: "git --no-pager show -s --format='%%ae'",
-                    returnStdout: true).split('\r\n')[2].trim() 
+                    returnStdout: true).split('\r\n')[2].replaceAll("'", "").trim()
                     echo "COMMITTER_EMAIL: ${COMMITTER_EMAIL}" 
 
                 emailext(
