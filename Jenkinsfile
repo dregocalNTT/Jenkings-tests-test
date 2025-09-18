@@ -11,6 +11,11 @@ pipeline {
                 bat 'mvn -B -DskipTests clean package'
             }
         }
+        stage('test'){
+            steps{
+                bat 'mvn clean test'
+            }
+        }
         stage('Run JAR') {
             steps {
                 bat 'java -jar target/demo-1.0-SNAPSHOT.jar %TEXT%'
